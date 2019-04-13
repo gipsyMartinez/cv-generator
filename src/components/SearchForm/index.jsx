@@ -1,11 +1,17 @@
 import React from "react";
+import axios from "axios";
 import PropTypes from "prop-types";
 import style from "./styles.module.css";
 
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "" };
+    this.state = { value: "", userData: {} };
+
+    this.state = {
+      userData: {},
+      value: ""
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -16,9 +22,18 @@ class SearchForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert("A name was submitted: " + this.state.value);
-    
     event.preventDefault();
+
+    const { value } = this.state;
+
+    axios
+      .get(`https://api.github.com/users/${value}`)
+      .then(response => {
+        this.setState({ userData: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
