@@ -2,6 +2,9 @@ import React from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import style from "./styles.module.css";
+import DataList from "../DataList";
+
+const BASE_API = "https://api.github.com";
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -23,11 +26,9 @@ class SearchForm extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
-
     const { value } = this.state;
-
     axios
-      .get(`https://api.github.com/users/${value}`)
+      .get(`${BASE_API}/users/${value}`)
       .then(response => {
         this.setState({ userData: response.data });
       })
@@ -37,18 +38,23 @@ class SearchForm extends React.Component {
   }
 
   render() {
+    const { userData } = this.state;
+    console.log("USERDATA", { ...userData });
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <React.Fragment>
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+        <DataList {...userData} />
+      </React.Fragment>
     );
   }
 }
