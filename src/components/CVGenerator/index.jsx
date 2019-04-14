@@ -15,6 +15,14 @@ const isEmpty = obj => {
   return true;
 };
 
+const getUserRepos = repos => {
+  return repos.filter(repo => !repo.fork);
+};
+
+const getUserLanguages = userRepos => {
+  return getUserRepos(userRepos).map(lan => lan.language);
+};
+
 class CVGenerator extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +30,10 @@ class CVGenerator extends React.Component {
 
     this.state = {
       userData: {},
-      value: ""
+      value: "",
+      repos: [],
+      userRepos: [],
+      userLanguages: []
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -39,7 +50,23 @@ class CVGenerator extends React.Component {
     axios
       .get(`${BASE_API}/users/${value}`)
       .then(response => {
-        this.setState({ userData: response.data });
+        this.setState(
+          { userData: response.data },
+          this.fetchUserRepositories(value)
+        );
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  fetchUserRepositories(user) {
+    axios
+      .get(`https://api.github.com/users/${user}/repos`)
+      .then(response => {
+        this.setState({
+          userLanguages: getUserLanguages(response.data)
+        });
       })
       .catch(error => {
         console.log(error);
@@ -47,7 +74,7 @@ class CVGenerator extends React.Component {
   }
 
   render() {
-    const { userData } = this.state;
+    const { userData, userLanguages } = this.state;
     const isUserEmpty = isEmpty(userData);
     console.log("USERDATA", { ...userData });
     return (
@@ -57,7 +84,9 @@ class CVGenerator extends React.Component {
           handleChange={this.handleChange}
           value={this.state.value}
         />
-        {!isUserEmpty && <DataList {...userData} />}
+        {!isUserEmpty && (
+          <DataList {...userData} userLanguages={userLanguages} />
+        )}
       </React.Fragment>
     );
   }

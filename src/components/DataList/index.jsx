@@ -7,7 +7,6 @@ import jsPDF from "jspdf";
 import LanguagesCharts from "../LanguagesCharts";
 // import style from "../styles.module.css";
 
-
 class DataList extends React.Component {
   constructor(props) {
     super(props);
@@ -29,7 +28,8 @@ class DataList extends React.Component {
       hireable,
       bio,
       organizations_url,
-      html_url
+      html_url,
+      userLanguages
     } = this.props;
 
     return (
@@ -55,7 +55,7 @@ class DataList extends React.Component {
         {/* Add LAzy loading here */}
 
         {/* <button onClick={exportPdf}>Imprimir</button> */}
-        <LanguagesCharts user={login} />
+        <LanguagesCharts userLanguages={userLanguages} />
         <PrintButton pdfName={`CV-${name}`} label={"IMPRIMIR"} />
       </React.Fragment>
     );
