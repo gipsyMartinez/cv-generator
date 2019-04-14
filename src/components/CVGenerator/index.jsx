@@ -16,7 +16,7 @@ const isEmpty = obj => {
 };
 
 const getUserRepos = repos => {
-  return repos.filter(repo => !repo.fork);
+  return repos.filter(repo => !repo.fork && repo.language != null);
 };
 
 const getUserLanguages = userRepos => {
@@ -33,7 +33,8 @@ class CVGenerator extends React.Component {
       value: "",
       repos: [],
       userRepos: [],
-      userLanguages: []
+      userLanguages: [],
+      error: ""
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -51,12 +52,12 @@ class CVGenerator extends React.Component {
       .get(`${BASE_API}/users/${value}`)
       .then(response => {
         this.setState(
-          { userData: response.data },
+          { userData: response.data, error: "" },
           this.fetchUserRepositories(value)
         );
       })
       .catch(error => {
-        console.log(error);
+        this.setState({ error: error, userData: {} });
       });
   }
 
@@ -65,20 +66,21 @@ class CVGenerator extends React.Component {
       .get(`https://api.github.com/users/${user}/repos`)
       .then(response => {
         this.setState({
-          userLanguages: getUserLanguages(response.data)
+          userLanguages: getUserLanguages(response.data),
+          error: ""
         });
       })
       .catch(error => {
-        console.log(error);
+        this.setState({ error: error, userData: {} });
       });
   }
 
   render() {
-    const { userData, userLanguages } = this.state;
+    const { userData, userLanguages, error } = this.state;
     const isUserEmpty = isEmpty(userData);
-    console.log("USERDATA", { ...userData });
+
     return (
-      <React.Fragment>
+      <div className={style.generatorContainer}>
         <SearchForm
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
@@ -87,7 +89,16 @@ class CVGenerator extends React.Component {
         {!isUserEmpty && (
           <DataList {...userData} userLanguages={userLanguages} />
         )}
-      </React.Fragment>
+        {error && (
+          <div className={style.errorNotification}>
+            <i className={style.errorIcon} />
+
+            <div className={style.errorMessage}>
+              User not found or maximum number of request exceeded
+            </div>
+          </div>
+        )}
+      </div>
     );
   }
 }

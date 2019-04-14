@@ -5,15 +5,11 @@ import PrintButton from "../PrintButton";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import LanguagesCharts from "../LanguagesCharts";
-// import style from "../styles.module.css";
+import style from "./styles.module.css";
 
 class DataList extends React.Component {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate() {
-    console.log("PROPSS", this.props);
   }
 
   render() {
@@ -27,7 +23,6 @@ class DataList extends React.Component {
       email,
       hireable,
       bio,
-      organizations_url,
       html_url,
       userLanguages
     } = this.props;
@@ -36,26 +31,63 @@ class DataList extends React.Component {
       <React.Fragment>
         <PageToPrint>
           <div id="singlePage">
-            <div>Data</div>
-            <img src={avatar_url} />
-            <div>{name}</div>
-            <div>{bio}</div>
-            <div>{html_url}</div>
-            <div>{company}</div>
-            <div>{login}</div>
-            <div>{blog}</div>
-            <div>{email}</div>
-            <div>{bio}</div>
-            <div>{organizations_url}</div>
-            <div>{location}</div>
-            <div>{hireable}</div>
+            <section className={style.headerSection}>
+              <img src={avatar_url} />
+              <div className={style.name}>{name}</div>
+              <div className={style.bio}>{bio}</div>
+              <hr />
+            </section>
+            <section>
+              {email && (
+                <div className={style.descriptionsContainer}>
+                  <span className={style.descriptionLabels}>Email: </span>
+                  <span>{email}</span>
+                </div>
+              )}
+
+              <div className={style.descriptionsContainer}>
+                <span className={style.descriptionLabels}>Portfolio: </span>
+                <span>{html_url}</span>
+              </div>
+              <div className={style.descriptionsContainer}>
+                <span className={style.descriptionLabels}>Github User: </span>
+                <span>{login}</span>
+              </div>
+              {company && (
+                <div className={style.descriptionsContainer}>
+                  <span className={style.descriptionLabels}>Company: </span>
+                  <span>{company}</span>
+                </div>
+              )}
+
+              {blog && (
+                <div className={style.descriptionsContainer}>
+                  <span className={style.descriptionLabels}>Blog: </span>
+                  <a href={blog}>{blog}</a>
+                </div>
+              )}
+
+              {location && (
+                <div className={style.descriptionsContainer}>
+                  <span className={style.descriptionLabels}>Location: </span>
+                  <span>{location}</span>
+                </div>
+              )}
+              {hireable && (
+                <div className={style.descriptionsContainer}>
+                  <span className={style.descriptionLabels}>Hireable: </span>
+                  <span>{hireable}</span>
+                </div>
+              )}
+            </section>
           </div>
         </PageToPrint>
 
         {/* Add LAzy loading here */}
+        {userLanguages.length > 0 && (
+          <LanguagesCharts userLanguages={userLanguages} />
+        )}
 
-        {/* <button onClick={exportPdf}>Imprimir</button> */}
-        <LanguagesCharts userLanguages={userLanguages} />
         <PrintButton pdfName={`CV-${name}`} label={"IMPRIMIR"} />
       </React.Fragment>
     );

@@ -1,13 +1,13 @@
 import React from "react";
-import axios from "axios";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+// import axios from "axios";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
 
 import { Doughnut } from "react-chartjs-2";
 
 const LanguaguesCharts = props => {
   const { userLanguages } = props;
-  console.log(userLanguages);
+
   const languages = userLanguages.filter(
     (e, i) => userLanguages.indexOf(e) >= i
   );
@@ -35,10 +35,12 @@ const LanguaguesCharts = props => {
   return (
     <div>
       <div>Skills</div>
-      {languages.map(l => (
-        <p>{l}</p>
-      ))}
-      <div id={"myChart"} />
+      <ul>
+        {languages.map(lang => (
+          <li>{lang}</li>
+        ))}
+      </ul>
+
       <Doughnut data={data} />
     </div>
   );

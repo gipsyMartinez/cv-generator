@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 import CVGenerator from "./components/CVGenerator";
-import logo from "./logo.svg";
-import "./App.css";
+import style from "./App.module.css";
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
+      <div className={style.app}>
+        <header className={style.appHeader}>
           <p>CV generator</p>
-          <CVGenerator />
         </header>
+        <div className={style.appWrapper}>
+          <CVGenerator />
+        </div>
       </div>
     );
   }
