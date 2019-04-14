@@ -1,9 +1,21 @@
 import React from "react";
-// import axios from "axios";
-// import html2canvas from "html2canvas";
-// import jsPDF from "jspdf";
-
 import { Doughnut } from "react-chartjs-2";
+import style from "./styles.module.css";
+
+const COLORS = [
+  "#ff6384",
+  "#36a2eb",
+  "#cc65fe",
+  "#ffce56",
+  "#FFE600",
+  "#005FFF",
+  "#00CED6",
+  "#1D8E3E",
+  "#FFA601",
+  "#186E8F",
+  "#5E0776",
+  "#C4995E"
+];
 
 const LanguaguesCharts = props => {
   const { userLanguages } = props;
@@ -26,7 +38,7 @@ const LanguaguesCharts = props => {
       datasets: [
         {
           data: Object.values(languagesRepos),
-          backgroundColor: ["#ff6384", "#36a2eb", "#cc65fe", "#ffce56"]
+          backgroundColor: COLORS
         }
       ]
     };
@@ -34,7 +46,9 @@ const LanguaguesCharts = props => {
 
   return (
     <div>
-      <div>Skills</div>
+      <div className={style.descriptionsContainer}>
+        <span className={style.descriptionLabels}>Main skills: </span>
+      </div>
       <ul>
         {languages.map(lang => (
           <li>{lang}</li>

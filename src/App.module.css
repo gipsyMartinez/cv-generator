@@ -1,7 +1,3 @@
-.app {
-  /* text-align: center; */
-}
-
 .appHeader {
   background-color: #ffffff;
   /* min-height: 100vh; */
@@ -13,27 +9,13 @@
   color: #000000;
 }
 
-.appContent {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
-}
-
 .appWrapper {
   display: flex;
   flex-wrap: wrap;
 }
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media print {
+  .nonPrintable {
+    display: none;
   }
 }

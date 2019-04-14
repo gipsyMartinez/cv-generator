@@ -5,7 +5,7 @@ class SearchForm extends React.Component {
   render() {
     const { handleSubmit, value, handleChange } = this.props;
     return (
-      <div className={style.formContainer}>
+      <div className={`${style.nonPrintable} ${style.formContainer}`}>
         <form onSubmit={handleSubmit}>
           <label>Github user:</label>
           <input
