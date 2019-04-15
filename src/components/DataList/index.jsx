@@ -25,68 +25,68 @@ const DataList = props => {
           <img alt="avatar-img" src={avatar_url} />
           <div className={style.name}>{name}</div>
           <div className={style.bio}>{bio}</div>
-          <hr />
+          <div className={style.hrDivider} />
         </section>
         <section>
-          {email && (
-            <div className={style.descriptionsContainer}>
-              <span className={`${style.descriptionLabels} email`}>
-                Email:{" "}
-              </span>
-              <span>{email}</span>
-            </div>
-          )}
+          <div className={style.textContainer}>
+            {email && (
+              <div className={style.descriptionsContainer}>
+                <span className={`${style.descriptionLabels} email`}>
+                  Email:{" "}
+                </span>
+                <span>{email}</span>
+              </div>
+            )}
 
-          <div className={style.descriptionsContainer}>
-            <span className={style.descriptionLabels}>Portfolio: </span>
-            <span>{html_url}</span>
+            <div className={style.descriptionsContainer}>
+              <span className={style.descriptionLabels}>Portfolio: </span>
+              <a href={html_url}>{html_url}</a>
+            </div>
+            <div className={style.descriptionsContainer}>
+              <span className={style.descriptionLabels}>Github User: </span>
+              <span>{login}</span>
+            </div>
+            {company && (
+              <div className={style.descriptionsContainer}>
+                <span className={`${style.descriptionLabels} company`}>
+                  Company:{" "}
+                </span>
+                <span>{company}</span>
+              </div>
+            )}
+
+            {blog && (
+              <div className={style.descriptionsContainer}>
+                <span className={`${style.descriptionLabels} blog`}>
+                  Blog:{" "}
+                </span>
+                <a href={blog}>{blog}</a>
+              </div>
+            )}
+
+            {location && (
+              <div className={style.descriptionsContainer}>
+                <span className={`${style.descriptionLabels} location`}>
+                  Location:{" "}
+                </span>
+                <span>{location}</span>
+              </div>
+            )}
+
+            <div className={style.descriptionsContainer}>
+              <span className={style.descriptionLabels}>Hireable: </span>
+              <span>{hireable ? "Yes" : "No"}</span>
+            </div>
           </div>
-          <div className={style.descriptionsContainer}>
-            <span className={style.descriptionLabels}>Github User: </span>
-            <span>{login}</span>
-          </div>
-          {company && (
-            <div className={style.descriptionsContainer}>
-              <span className={`${style.descriptionLabels} company`}>
-                Company:{" "}
-              </span>
-              <span>{company}</span>
-            </div>
-          )}
-
-          {blog && (
-            <div className={style.descriptionsContainer}>
-              <span className={`${style.descriptionLabels} blog`}>Blog: </span>
-              <a href={blog}>{blog}</a>
-            </div>
-          )}
-
-          {location && (
-            <div className={style.descriptionsContainer}>
-              <span className={`${style.descriptionLabels} location`}>
-                Location:{" "}
-              </span>
-              <span>{location}</span>
-            </div>
-          )}
-
-          <div className={style.descriptionsContainer}>
-            <span className={style.descriptionLabels}>Hireable: </span>
-            <span>{hireable ? "Yes" : "No"}</span>
-          </div>
-
           {userLanguages.length > 0 && (
             <LanguagesCharts userLanguages={userLanguages} />
           )}
         </section>
       </div>
 
-      <div className={style.buttonContainer}>
-        <button
-          className={`${style.nonPrintable} ${style.inputButton}`}
-          onClick={() => window.print()}
-        >
-          IMPRIMIR
+      <div className={`${style.nonPrintable} ${style.buttonContainer}`}>
+        <button className={style.inputButton} onClick={() => window.print()}>
+          PRINT
         </button>
       </div>
     </React.Fragment>

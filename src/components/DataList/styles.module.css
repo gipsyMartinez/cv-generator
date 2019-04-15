@@ -30,12 +30,6 @@ img {
   margin: 10px 0px;
 }
 
-@media print {
-  .nonPrintable {
-    display: none;
-  }
-}
-
 .inputButton {
   font-size: 15px;
   line-height: 20px;
@@ -70,4 +64,23 @@ img {
 .buttonContainer {
   text-align: center;
   margin: 20px 0;
+}
+
+.hrDivider {
+  border-bottom: 2px solid #00ced6;
+  width: 304px;
+  text-align: center;
+  margin: 30px auto auto auto;
+}
+
+@media print {
+  .nonPrintable {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .textContainer {
+    padding: 0px 30px;
+  }
 }

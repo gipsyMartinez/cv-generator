@@ -18,3 +18,9 @@
   padding: 14px;
   text-align: center;
 }
+
+@media (max-width: 700px) {
+  .generatorContainer {
+    width: 100%;
+  }
+}

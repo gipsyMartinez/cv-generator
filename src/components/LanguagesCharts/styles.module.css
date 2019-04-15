@@ -5,3 +5,16 @@
 .descriptionsContainer {
   margin: 10px 0px;
 }
+
+.hrDivider {
+  border-bottom: 2px solid #00ced6;
+  width: 304px;
+  text-align: center;
+  margin: 30px auto 30px auto;
+}
+
+@media (max-width: 700px) {
+  .textContainer {
+    padding: 0px 30px;
+  }
+}

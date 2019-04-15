@@ -13,7 +13,7 @@ const SearchForm = props => {
           className={style.inputText}
           value={value}
           onChange={handleChange}
-          placeholder="example: gipsyMartinez"
+          placeholder="Example: gipsyMartinez"
         />
 
         <div className={style.buttonContainer}>

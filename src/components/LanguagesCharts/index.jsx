@@ -33,19 +33,22 @@ const LanguagesCharts = props => {
   };
 
   return (
-    <div>
-      <div className={style.descriptionsContainer}>
-        <span className={style.descriptionLabels}>Main skills: </span>
+    <React.Fragment>
+      <div className={style.textContainer}>
+        <div className={style.descriptionsContainer}>
+          <span className={style.descriptionLabels}>Main skills: </span>
+        </div>
+        <ul>
+          {languages.map((lang, i) => (
+            <li key={`lang-${i}`}>{lang}</li>
+          ))}
+        </ul>
+        <div className={style.hrDivider} />
       </div>
-      <ul>
-        {languages.map((lang, i) => (
-          <li key={`lang-${i}`}>{lang}</li>
-        ))}
-      </ul>
       <Suspense fallback={"Loading..."}>
         <Doughnut data={data} />
       </Suspense>
-    </div>
+    </React.Fragment>
   );
 };
 

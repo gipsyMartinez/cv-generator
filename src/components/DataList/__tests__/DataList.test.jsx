@@ -20,7 +20,7 @@ describe("> DataList/index.jsx", () => {
     wrapper = shallow(<DataList {...props} />);
   });
 
-  it("it should make conditional rendering for company, , email and location", () => {
+  it("it should make conditional rendering for company, blog, email and location", () => {
     expect(wrapper.find(".company").length).toBe(0);
     expect(wrapper.find(".blog").length).toBe(0);
     expect(wrapper.find(".email").length).toBe(0);
@@ -42,6 +42,7 @@ describe("> DataList/index.jsx", () => {
 
   it("it should render LanguagesCharts components only when user owns repositories", () => {
     expect(wrapper.find(LanguagesCharts).length).toBe(0);
+    // Setting props
     wrapper.setProps({ userLanguages: ["Java", "Phyton"] });
     expect(wrapper.find(LanguagesCharts).length).toBe(1);
   });
