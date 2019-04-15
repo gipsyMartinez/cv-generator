@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 import style from "./styles.module.css";
 import DataList from "../DataList";
 import SearchForm from "../SearchForm";

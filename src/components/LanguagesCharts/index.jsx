@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Doughnut } from "react-chartjs-2";
+import PropTypes from "prop-types";
 import style from "./styles.module.css";
 import { CHART_COLORS } from "../../constants/colors";
 import { formatLanguages } from "../../utils/userRepository";
@@ -46,6 +47,10 @@ const LanguagesCharts = props => {
       </Suspense>
     </div>
   );
+};
+
+LanguagesCharts.propTypes = {
+  userLanguages: PropTypes.array.isRequired
 };
 
 export default LanguagesCharts;
