@@ -1,31 +1,18 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Doughnut } from "react-chartjs-2";
 import style from "./styles.module.css";
+import { CHART_COLORS } from "../../constants/colors";
+import { formatLanguages } from "../../utils/userRepository";
 
-const COLORS = [
-  "#ff6384",
-  "#36a2eb",
-  "#cc65fe",
-  "#ffce56",
-  "#FFE600",
-  "#005FFF",
-  "#00CED6",
-  "#1D8E3E",
-  "#FFA601",
-  "#186E8F",
-  "#5E0776",
-  "#C4995E"
-];
-
-const LanguaguesCharts = props => {
+const LanguagesCharts = props => {
   const { userLanguages } = props;
 
-  const languages = userLanguages.filter(
-    (e, i) => userLanguages.indexOf(e) >= i
-  );
-  var languagesRepos = {};
-  userLanguages.forEach(function(x) {
-    return (languagesRepos[x] = (languagesRepos[x] || 0) + 1);
+  const languages = formatLanguages(userLanguages);
+
+  let languagesRepos = {};
+  userLanguages.forEach(x => {
+    languagesRepos[x] = (languagesRepos[x] || 0) + 1;
+    return languagesRepos;
   });
 
   const data = canvas => {
@@ -38,7 +25,7 @@ const LanguaguesCharts = props => {
       datasets: [
         {
           data: Object.values(languagesRepos),
-          backgroundColor: COLORS
+          backgroundColor: CHART_COLORS
         }
       ]
     };
@@ -50,14 +37,15 @@ const LanguaguesCharts = props => {
         <span className={style.descriptionLabels}>Main skills: </span>
       </div>
       <ul>
-        {languages.map(lang => (
-          <li>{lang}</li>
+        {languages.map((lang, i) => (
+          <li key={`lang-${i}`}>{lang}</li>
         ))}
       </ul>
-
-      <Doughnut data={data} />
+      <Suspense fallback={"Loading..."}>
+        <Doughnut data={data} />
+      </Suspense>
     </div>
   );
 };
 
-export default LanguaguesCharts;
+export default LanguagesCharts;

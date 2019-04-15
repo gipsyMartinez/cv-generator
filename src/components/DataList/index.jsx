@@ -69,25 +69,19 @@ class DataList extends React.Component {
                 <span>{location}</span>
               </div>
             )}
-            {hireable && (
-              <div className={style.descriptionsContainer}>
-                <span className={style.descriptionLabels}>Hireable: </span>
-                <span>{hireable}</span>
-              </div>
-            )}
+
+            <div className={style.descriptionsContainer}>
+              <span className={style.descriptionLabels}>Hireable: </span>
+              <span>{hireable ? "Yes" : "No"}</span>
+            </div>
+
             {userLanguages.length > 0 && (
               <LanguagesCharts userLanguages={userLanguages} />
             )}
           </section>
         </div>
 
-        {/* Add LAzy loading here */}
-
-        <PrintButton
-          pdfName={`CV-${name}`}
-          label={"IMPRIMIR"}
-          id="printableArea"
-        />
+        <PrintButton label={"IMPRIMIR"} />
       </React.Fragment>
     );
   }

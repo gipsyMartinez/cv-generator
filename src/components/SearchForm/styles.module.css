@@ -23,9 +23,7 @@
 .inputButton {
   font-size: 15px;
   line-height: 20px;
-
   display: inline-block;
-
   min-width: 200px;
   height: 45px;
   padding: 0 40px;
@@ -35,7 +33,6 @@
   text-align: center;
   text-decoration: none;
   background-color: #00ced6;
-  /* background-color: #243647; */
   cursor: pointer;
   transition: 0.3s;
   margin-top: 20px;

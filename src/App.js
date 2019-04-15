@@ -7,7 +7,7 @@ class App extends Component {
     return (
       <div className={style.app}>
         <header className={`${style.nonPrintable} ${style.appHeader}`}>
-          <p>CV generator</p>
+          <p>Dev CV generator</p>
         </header>
         <div className={style.appWrapper}>
           <CVGenerator />

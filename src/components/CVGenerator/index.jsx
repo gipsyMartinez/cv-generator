@@ -4,24 +4,9 @@ import PropTypes from "prop-types";
 import style from "./styles.module.css";
 import DataList from "../DataList";
 import SearchForm from "../SearchForm";
-
-// TODO: MOVE TO OTHER FILE
-const BASE_API = "https://api.github.com";
-
-const isEmpty = obj => {
-  for (var key in obj) {
-    if (obj.hasOwnProperty(key)) return false;
-  }
-  return true;
-};
-
-const getUserRepos = repos => {
-  return repos.filter(repo => !repo.fork && repo.language != null);
-};
-
-const getUserLanguages = userRepos => {
-  return getUserRepos(userRepos).map(lan => lan.language);
-};
+import { GET_USER } from "../../constants/api";
+import { isEmptyObj } from "../../utils/helpers";
+import { getUserLanguages } from "../../utils/userRepository";
 
 class CVGenerator extends React.Component {
   constructor(props) {
@@ -49,7 +34,7 @@ class CVGenerator extends React.Component {
     event.preventDefault();
     const { value } = this.state;
     axios
-      .get(`${BASE_API}/users/${value}`)
+      .get(`${GET_USER}/${value}`)
       .then(response => {
         this.setState(
           { userData: response.data, error: "" },
@@ -63,7 +48,7 @@ class CVGenerator extends React.Component {
 
   fetchUserRepositories(user) {
     axios
-      .get(`https://api.github.com/users/${user}/repos`)
+      .get(`${GET_USER}/${user}/repos`)
       .then(response => {
         this.setState({
           userLanguages: getUserLanguages(response.data),
@@ -77,7 +62,7 @@ class CVGenerator extends React.Component {
 
   render() {
     const { userData, userLanguages, error } = this.state;
-    const isUserEmpty = isEmpty(userData);
+    const isUserEmpty = isEmptyObj(userData);
 
     return (
       <div className={style.generatorContainer}>
