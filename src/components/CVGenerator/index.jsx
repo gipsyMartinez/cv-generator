@@ -10,7 +10,6 @@ import { getUserLanguages } from "../../utils/userRepository";
 class CVGenerator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { value: "", userData: {} };
 
     this.state = {
       userData: {},
@@ -61,6 +60,7 @@ class CVGenerator extends React.Component {
 
   render() {
     const { userData, userLanguages, error } = this.state;
+
     const isUserEmpty = isEmptyObj(userData);
 
     return (
