@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import PropTypes from "prop-types";
 import style from "./styles.module.css";
@@ -11,6 +11,7 @@ const LanguagesCharts = props => {
   const languages = formatLanguages(userLanguages);
 
   let languagesRepos = {};
+
   userLanguages.forEach(x => {
     languagesRepos[x] = (languagesRepos[x] || 0) + 1;
     return languagesRepos;
@@ -45,9 +46,8 @@ const LanguagesCharts = props => {
         </ul>
         <div className={style.hrDivider} />
       </div>
-      <Suspense fallback={"Loading..."}>
-        <Doughnut data={data} />
-      </Suspense>
+
+      <Doughnut data={data} />
     </React.Fragment>
   );
 };

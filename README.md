@@ -2,6 +2,14 @@
 
 CV generator made in react. It uses github API for getting user info and generates programing languages charts.
 
+### `Technology stack`
+
+- React DOM
+- Github API
+- Jest
+- Enzyme
+- CSS Modules
+
 ### `npm install`
 
 To install the project dependencies
@@ -25,4 +33,4 @@ Your app is ready to be deployed!
 
 ### `npm run lint`
 
-It run eslint, it is a quality tool that checks for problems in Javascript programs.
+Runs eslint to check problems in Javascript code.
